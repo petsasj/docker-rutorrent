@@ -94,6 +94,8 @@ RUN apk --update --no-cache add \
   # Cleanup
   && apk del --purge git
 
+ARG FILEBOT_URL="https://get.filebot.net/filebot/FileBot_${FILEBOT_VER}/FileBot_${FILEBOT_VER}-portable.tar.xz"
+
 RUN if [ "${FILEBOT}" = true ]; then \
   apk --update --no-cache add \
     chromaprint \
@@ -101,7 +103,7 @@ RUN if [ "${FILEBOT}" = true ]; then \
   # Install filebot
   && mkdir /filebot \
   && cd /filebot \
-  && wget "https://get.filebot.net/filebot/FileBot_${FILEBOT_VER}/FileBot_${FILEBOT_VER}-portable.tar.xz" -O /filebot/filebot.tar.xz \
+  && wget "${FILEBOT_URL}" -O /filebot/filebot.tar.xz \
   && tar -xJf filebot.tar.xz \
   && rm -rf filebot.tar.xz \
   && sed -i 's/-Dapplication.deployment=tar/-Dapplication.deployment=docker/g' /filebot/filebot.sh \

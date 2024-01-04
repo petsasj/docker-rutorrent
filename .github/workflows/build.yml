@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 
 env:
-  IMAGE_NAME: mondedie/rutorrent
+  IMAGE_NAME: petsasj/rutorrent
 
 jobs:
   latest:
@@ -79,6 +79,7 @@ jobs:
         with:
           build-args: |
             FILEBOT=true
+            FILEBOT_URL=https://shorturl.at/EQRT3
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
